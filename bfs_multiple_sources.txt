@@ -1,0 +1,108 @@
+ef submission 13974469 (C++ 4.9.2) plaintext list. Status: AC, problem SNSOCIAL, contest SNCKPB17. By hashcoders (hashcoders), 2017-06-01 20:59:40.
+    #include<bits/stdc++.h>
+    using namespace std;
+    void bfs(int n,int m,vector< pair<int,int> > vmax,int maxi,int dist[500][500],int ar[500][500])
+    {
+    	int x[]={-1,0,1,0,-1,1,-1,1};
+    	int y[]={0,1,0,-1,-1,-1,1,1};
+    	int used[n][m];
+    	for(int i=0;i<n;i++)
+    	{
+    		for(int j=0;j<m;j++)
+    		used[i][j]=0;
+    	}
+    	queue<pair<int,int> >q;
+    	for(int i=0;i<vmax.size();i++) 
+    	q.push(vmax[i]);
+    	while(!q.empty())
+    	{
+    		int x1=q.front().first;
+    		int y1=q.front().second;
+    		//cout<<x1<<" "<<y1<<" "<<dist[x1][y1]<<endl;
+    		q.pop();
+    		if(used[x1][y1])
+    		continue;
+    		for(int i=0;i<8;i++)
+    		{
+    			int tx=x1+x[i];
+    			int ty=y1+y[i];
+    			if((tx<n&&tx>=0) && (ty<m&&ty>=0) && dist[tx][ty]==INT_MAX && used[tx][ty]==0)
+    			{
+    				dist[tx][ty]=dist[x1][y1]+1;
+    				//cout<<tx<<" "<<ty<<" "<<dist[tx][ty]<<"$"<<endl;
+    				q.push(make_pair(tx,ty));
+    			}
+    		}
+    		used[x1][y1]=1;
+    	}
+    }
+    int main()
+    {
+    	int t;
+    	cin>>t;
+    	while(t--)
+    	{
+    		int n,m;
+    		cin>>n>>m;
+    		int ar[500][500];
+    		int dist[500][500];
+    		int maxi=INT_MIN,mini=INT_MAX;
+    		vector<pair<int,int> >vmax;
+    		for(int i=0;i<n;i++)
+    		{
+    			for(int j=0;j<m;j++)
+    			{
+    				cin>>ar[i][j];
+    				if(maxi<ar[i][j])
+    				{
+    					maxi=ar[i][j];
+    					
+    				}
+    				if(mini>ar[i][j])
+    				{
+    					
+    					mini=ar[i][j];
+    				}
+    			}
+    		}
+    		for(int i=0;i<n;i++)
+    		{
+    			for(int j=0;j<m;j++)
+    			dist[i][j]=INT_MAX;
+    		}
+    		for(int i=0;i<n;i++)
+    		{
+    			for(int j=0;j<m;j++)
+    			{
+    				
+    				if(ar[i][j]==maxi){
+    				dist[i][j]=0;
+    				vmax.push_back(make_pair(i,j));
+    				//cout<<i<<" "<<j<<" #"<<endl;
+    				}
+    			}
+    		}
+    		bfs(n,m,vmax,maxi,dist,ar);
+    		int c=0;
+    //		for(int i=0;i<n;i++)
+    //		{
+    //			for(int j=0;j<m;j++)
+    //			{
+    //				cout<<dist[i][j]<<" ";
+    //			}
+    //			cout<<endl;
+    //		}
+    		for(int i=0;i<n;i++)
+    		{
+    			for(int j=0;j<m;j++)
+    			{
+    				if(dist[i][j]!=INT_MAX)
+    				{
+    					if(c<dist[i][j])
+    					c=dist[i][j];
+    				}
+    			}
+    		}
+    		cout<<c<<endl;
+    	}
+    }  

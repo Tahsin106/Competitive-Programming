@@ -1,0 +1,137 @@
+template <class T> inline T bigmod(T x,T p,T M){ll ret = 1;for(; p > 0; p >>= 1){if(p & 1) ret = (ret * x) % M;x = (x*x) % M;}return (T)ret;}
+template <class T> inline T gcd(T x,T y){if(y==0)return x;return gcd(y,x%y);}
+template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}
+template <class T> inline T bigpow(T p,T e){ll ret = 1;for(; e > 0; e >>= 1){if(e & 1) ret = (ret * p);p = (p * p);}return (T)ret;}
+
+#define fastio ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+ll C(ll n, ll r) {
+    if(r > n / 2) r = n - r;
+    ll var = 1;
+    int i;
+
+    for(i = 1; i <= r; i++) {
+        var *= n - r + i;
+        var /= i;
+    }
+
+    return var;
+}
+
+ll dp[1000][1000];
+
+ll nCr(ll n,ll r)
+{
+    if(n==r) return dp[n][r] = 1;
+    if(r==0) return dp[n][r] = 1;
+    if(r==1) return dp[n][r] = n%mod;
+    if(dp[n][r]) return dp[n][r]%mod;
+    return dp[n][r] = (nCr(n-1,r)%mod + nCr(n-1,r-1)%mod)%mod;
+}
+
+ll Set(ll N,ll pos){return N=N|(1LL<<pos);}
+ll reset(ll N,ll pos){return N = N & ~(1LL<<pos);}
+bool check(ll N,ll pos){return (bool)(N & (1LL<<pos));}
+
+
+template <class T> inline T bigmod(T x,T p,T M)
+{
+    ll ans = 1;
+
+    for(; p > 0; p >>= 1)
+    {
+        if(p & 1) ans = (ans * x) % M;
+        x = (x*x) % M;
+    }
+    return (T)ans;
+}
+
+
+ll Mul(ll A,ll B,ll M)
+{
+    ll R=0;
+    for(A%=M; B; B>>=1)
+    {
+       if(B&1) R=(R+A)%M; A=(A+A)%M;
+    }
+    return R;
+}
+
+template<class T>T multiplication(T n,T p,T m){if(p==0)return (T)0;T x=multiplication(n,p/2,m);x=(x+x)%m;if(p&1)x=(x+n)%m;return x;}
+template <class T> string tostring(T n) {stringstream ss; ss << n; return ss.str();}
+
+
+template<typename T> T POW(T b,T p)          //Pow calculation
+ {
+    T r=1;
+    while(p) {
+        if(p&1)r=(r*b);
+        b=(b*b);
+        p>>=1;
+    }
+    return r;
+}
+
+long long bigMul(long long A,long long B,long long M) { long long R=0; for(A%=M; B; B>>=1) { if(B&1) R=(R+A)%M; A=(A+A)%M; } return R; }
+
+/*
+//with template
+template<class T> inline long long bigmod(long long p,long long e,long long M){
+    long long ret = 1;
+    for(; e > 0; e >>= 1){
+        if(e & 1) ret = (ret * p) % M;
+        p = (p * p) % M;
+    } return ret;
+}
+template <class T> inline T gcd(T a,T b){if(b==0)return a;return gcd(b,a%b);}
+template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}
+
+*/
+
+//without template
+
+long long bigmod(long long p,long long e,long long M){
+    long long ret = 1;
+    for(; e > 0; e >>= 1){
+        if(e & 1) ret = (ret * p) % M;
+        p = (p * p) % M;
+    } return ret;
+}
+
+ll gcd(ll a,ll b){if(b==0)return a;return gcd(b,a%b);}
+ll modinverse(ll a,ll M){return bigmod(a,M-2,M);}
+
+template<class T>inline bool read(T &x){ int c=getchar();int sgn=1;
+  while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+  for(x=0; ~c&&'0'<=c&&c<='9'; c=getchar())x=x*10+c-'0';x*=sgn;return ~c;
+}
+
+void scan( ll& num ) {
+	num = 0;
+	char c = getchar_unlocked();
+	int flag = 0;
+	while ( !((c >= '0' & c <= '9') || c == '-') ) {
+		c = getchar_unlocked();
+	}
+	if ( c == '-' ) {
+		flag = 1;
+		c = getchar_unlocked();
+	}
+	while ( c >= '0' && c <= '9' ) {
+		num = (num << 1) + (num << 3) + c - '0';
+		c = getchar_unlocked();
+	}
+	if ( flag == 1 ) {
+		num = 0 - num;
+	}
+}
+
+/**Direction**/
+///int dx[8] = {0, 1, 1, 1, 0, -1, -1, -1};int dy[8] = {1, 1, 0, -1, -1, -1, 0, 1}; ///8 Direction
+///int dx[4] = {1, 0, -1, 0};int dy[4] = {0, 1, 0, -1}; ///4 Direction
+ll dx[4] = {1, 0, -1, 0};
+ll dy[4] = {0, 1, 0, -1}; 
+// +1 -- > 90 degree left and +3 --> 90 degree right
+///int dx[]={2,1,-1,-2,-2,-1,1,2};int dy[]={1,2,2,1,-1,-2,-2,-1};///Knight Direction
+///int dx[]={-1,-1,+0,+1,+1,+0};int dy[]={-1,+1,+2,+1,-1,-2}; ///Hexagonal Direction
+

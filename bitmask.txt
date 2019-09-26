@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+#define rep(i,n) for(ll i = 1;i<=n;i++)
+#define rep0(i,n) for(ll i = 0;i<n;i++)
+#define reps(i,a,n) for(ll i = a;i<=n;i++)
+#define sf(n) scanf("%lld",&n)
+#define sff(n,m) scanf("%lld %lld",&n,&m)
+#define pf(n) printf("%lld\n",n)
+#define pfs(s) printf("%s\n",s)
+#define bug printf("BUG\n")
+#define pfstr(s) printf("%s\n",s.c_str())
+#define cs(i,n) printf("Case %lld: %lld\n",i,n)
+#define clr(dp,v) memset(dp,v,sizeof dp)
+#define pb push_back
+#define mpr make_pair
+#define PLL pair<ll,ll>
+#define ff first
+#define ss second
+#define mx 10000005
+
+int main()
+{
+ll n = 4;
+
+ll i,j;
+
+for(i = 0;i<(1<<n);i++)
+{
+   for(j = n-1;j>=0;j--)
+   {
+     if(i&(1<<j)) cout<<1;
+     else cout<<0;
+
+     cout<<" ";
+     //cout<<(i&(1<<j))<<" ";
+   }
+   cout<<endl;
+}
+
+return 0;
+}

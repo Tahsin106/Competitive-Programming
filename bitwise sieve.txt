@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define mx 10000000
+
+int prime[3+mx/64];
+
+bool check(int x)
+{
+  return(prime[x/64] & (1 << ((x >> 1) & 31)));
+}
+
+bool Set(int x)
+{
+  prime[x/64] |= (1 << ((x >> 1) & 31));
+}
+
+bool checkPrime(int x) {return (x&1)&&check(x); }
+
+void bitWiseSieve(int n)
+{
+    memset(prime,0,sizeof prime);
+
+    for (int i = 3; i * i <= n; i += 2) {
+        if (!check(i))
+            for (int j = i * i, k = i << 1; j < = n; j += k)
+                Set(j);
+    }
+
+    printf("2 ");
+
+    for (int i = 3; i <= n; i += 2)
+        if (!check(i))
+            printf("%d ", i);
+}
+
+// Driver code
+int main()
+{
+    int n = 30;
+    bitWiseSieve(n);
+    return 0;
+}

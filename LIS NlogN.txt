@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define sf(n) scanf("%lld",&n)
+#define sff(n,m) scanf("%lld %lld",&n,&m)
+#define fastio ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define PLL pair<ll,ll>
+#define mod 1000000007
+#define mx 30003
+
+ll a[mx];
+
+int main()
+{
+ll t,n;
+//sf(t);
+t = 1;
+
+while(t--)
+{
+  sf(n);
+
+  for(ll i = 1;i<=n;i++)
+  {
+    sf(a[i]);
+  }
+
+  ll ans = 0;
+
+  vector<ll>v(n+2,1e18);
+
+  for(ll i = 1;i<=n;i++)
+  {
+    ll id = lower_bound(v.begin(),v.end(),a[i]) - v.begin();
+    v[id] = a[i];
+
+    ans = max(ans,id+1);
+  }
+
+  cout<<ans<<endl;
+}
+
+return 0;
+}
